@@ -118,11 +118,13 @@ func getAccessToken(tokenId string) (*accessToken, *resp.RestErr) {
 		return nil, restErr
 	}
 
-	var at *accessToken
-	if err := json.Unmarshal(res.Bytes(), &at); err != nil {
+	var restRes struct {
+		Data *accessToken
+	}
+	if err := json.Unmarshal(res.Bytes(), &restRes); err != nil {
 		fmt.Println(err.Error())
 		return nil, resp.InternalServerError("failed to parse access token data")
 	}
 
-	return at, nil
+	return restRes.Data, nil
 }
