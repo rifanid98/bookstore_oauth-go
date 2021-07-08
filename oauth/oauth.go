@@ -105,6 +105,7 @@ func AuthenticateRequest(request *http.Request) *resp.RestErr {
 
 func getAccessToken(tokenId string) (*accessToken, *resp.RestErr) {
 	res := oauthRestClient.Get(fmt.Sprintf("oauth/token/%s", tokenId))
+	fmt.Println(res)
 	if res == nil || res.Response == nil {
 		return nil, resp.InternalServerError("failed to get tokenId")
 	}
