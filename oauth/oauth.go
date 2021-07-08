@@ -13,9 +13,9 @@ import (
 )
 
 const (
-	headerXPublic   = "X-Public"
-	headerXClientId = "X-Client-Id"
-	headerXCallerId = "X-Caller-Id"
+	HeaderXPublic   = "X-Public"
+	HeaderXClientId = "X-Client-Id"
+	HeaderXCallerId = "X-Caller-Id"
 
 	paramTokenId = "token_id"
 )
@@ -39,7 +39,7 @@ func IsPublic(request *http.Request) bool {
 		return true
 	}
 
-	return request.Header.Get(headerXPublic) == "true"
+	return request.Header.Get(HeaderXPublic) == "true"
 }
 
 func GetCallerId(request *http.Request) int64 {
@@ -47,7 +47,7 @@ func GetCallerId(request *http.Request) int64 {
 		return 0
 	}
 
-	callerId, err := strconv.ParseInt(request.Header.Get(headerXCallerId), 10, 64)
+	callerId, err := strconv.ParseInt(request.Header.Get(HeaderXCallerId), 10, 64)
 	if err != nil {
 		return 0
 	}
@@ -60,7 +60,7 @@ func GetClientId(request *http.Request) int64 {
 		return 0
 	}
 
-	clientId, err := strconv.ParseInt(request.Header.Get(headerXClientId), 10, 64)
+	clientId, err := strconv.ParseInt(request.Header.Get(HeaderXClientId), 10, 64)
 	if err != nil {
 		return 0
 	}
@@ -73,8 +73,8 @@ func cleanRequest(request *http.Request) {
 		return
 	}
 
-	request.Header.Del(headerXClientId)
-	request.Header.Del(headerXCallerId)
+	request.Header.Del(HeaderXClientId)
+	request.Header.Del(HeaderXCallerId)
 }
 
 func AuthenticateRequest(request *http.Request) *resp.RestErr {
@@ -97,8 +97,8 @@ func AuthenticateRequest(request *http.Request) *resp.RestErr {
 		return err
 	}
 
-	request.Header.Add(headerXClientId, fmt.Sprintf("%v", at.UserId))
-	request.Header.Add(headerXCallerId, fmt.Sprintf("%v", at.UserId))
+	request.Header.Add(HeaderXClientId, fmt.Sprintf("%v", at.UserId))
+	request.Header.Add(HeaderXCallerId, fmt.Sprintf("%v", at.UserId))
 
 	return nil
 }
