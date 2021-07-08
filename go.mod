@@ -1,4 +1,4 @@
-module bookstore_oauth-go
+module github.com/rifanid98/bookstore_oauth-go
 
 go 1.16
 
