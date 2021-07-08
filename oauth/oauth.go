@@ -21,8 +21,9 @@ const (
 )
 
 var (
+	BaseUrl         = "http://localhost:8001"
 	oauthRestClient = rest.RequestBuilder{
-		BaseURL: "http://localhost:8002",
+		BaseURL: BaseUrl,
 		Timeout: 200 * time.Millisecond,
 	}
 )
@@ -90,6 +91,9 @@ func AuthenticateRequest(request *http.Request) *resp.RestErr {
 
 	at, err := getAccessToken(tokenId)
 	if err != nil {
+		if err.StatusCode == http.StatusNotFound {
+			return nil
+		}
 		return err
 	}
 
