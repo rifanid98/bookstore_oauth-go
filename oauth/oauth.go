@@ -1,7 +1,6 @@
 package oauth
 
 import (
-	resp "bookstore_oauth-go/utils/response"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -10,6 +9,7 @@ import (
 	"time"
 
 	"github.com/mercadolibre/golang-restclient/rest"
+	resp "github.com/rifanid98/bookstore_oauth-go/utils/response"
 )
 
 const (
